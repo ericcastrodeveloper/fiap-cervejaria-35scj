@@ -38,9 +38,8 @@ public class CervejaServiceImpl implements CervejaService {
     public CervejaDTO create(CreateCervejaDTO createCervejaDTO) {
         Cerveja cerveja = new Cerveja(createCervejaDTO);
 
-        Cerveja save = cervejaRepository.save(cerveja);
-
-        return new CervejaDTO(save);
+        CervejaDTO cervejaDTO = saveAndGetCervejaDTO(cerveja);
+        return cervejaDTO;
     }
 
     @Override
@@ -53,9 +52,7 @@ public class CervejaServiceImpl implements CervejaService {
         cerveja.setTeorAlcoolico(createCervejaDTO.getTeorAlcoolico());
         cerveja.setTipo(createCervejaDTO.getTipo());
 
-        Cerveja save = cervejaRepository.save(cerveja);
-
-        CervejaDTO cervejaDTO = new CervejaDTO(save);
+        CervejaDTO cervejaDTO = saveAndGetCervejaDTO(cerveja);
         return cervejaDTO;
     }
 
@@ -65,12 +62,13 @@ public class CervejaServiceImpl implements CervejaService {
         Cerveja cerveja = cervejaRepository.findById(id).get();
         cerveja.setPreco(precoCervejaDTO.getPreco());
 
-        Cerveja update = cervejaRepository.save(cerveja);
-
-
-        CervejaDTO cervejaDTO = new CervejaDTO(update);
-
+        CervejaDTO cervejaDTO = saveAndGetCervejaDTO(cerveja);
         return cervejaDTO;
+    }
+
+    private CervejaDTO saveAndGetCervejaDTO(Cerveja cerveja) {
+        Cerveja savedCerveja = cervejaRepository.save(cerveja);
+        return new CervejaDTO(savedCerveja);
     }
 
     @Override

@@ -2,13 +2,19 @@ package br.com.fiap.cervejaria.entity;
 
 import br.com.fiap.cervejaria.dto.CreateCervejaDTO;
 import br.com.fiap.cervejaria.dto.Tipo;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.auditing.config.AuditingConfiguration;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "TB_CERVEJA")
+@EntityListeners(AuditingEntityListener.class)
 public class Cerveja {
 
     @Id
@@ -30,6 +36,14 @@ public class Cerveja {
 
     @Column
     private ZonedDateTime dataLancamento;
+
+    @Column(name="created_date")
+    @CreatedDate
+    private Date dataCriacao;
+
+    @Column(name="updated_date")
+    @LastModifiedDate
+    private Date dataAlteracao;
 
     public Cerveja() {
     }
@@ -88,5 +102,21 @@ public class Cerveja {
 
     public void setDataLancamento(ZonedDateTime dataLancamento) {
         this.dataLancamento = dataLancamento;
+    }
+
+    public Date getDataCriacao() {
+        return dataCriacao;
+    }
+
+    public void setDataCriacao(Date dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public Date getDataAlteracao() {
+        return dataAlteracao;
+    }
+
+    public void setDataAlteracao(Date dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
     }
 }
