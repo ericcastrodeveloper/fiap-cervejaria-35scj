@@ -24,3 +24,7 @@ spring:
         true
       path:
         /h2
+
+jwt:
+  secret: F14ps3cr3t
+  expiration: 1
