@@ -37,11 +37,11 @@ public class Cerveja {
     @Column
     private ZonedDateTime dataLancamento;
 
-    @Column(name="created_date")
+    @Column(name="data_criacao")
     @CreatedDate
     private Date dataCriacao;
 
-    @Column(name="updated_date")
+    @Column(name="data_atualizacao")
     @LastModifiedDate
     private Date dataAlteracao;
 
